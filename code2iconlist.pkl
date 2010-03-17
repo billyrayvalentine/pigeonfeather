@@ -1,0 +1,262 @@
+(lp0
+(lp1
+S'tornado'
+p2
+aS'tstorm3.png'
+p3
+ag3
+aa(lp4
+S'tropical storm'
+p5
+ag3
+ag3
+aa(lp6
+S'hurricane'
+p7
+ag3
+ag3
+aa(lp8
+S'severe thunderstorms'
+p9
+ag3
+ag3
+aa(lp10
+S'thunderstorms'
+p11
+ag3
+ag3
+aa(lp12
+S'mixed rain and snow'
+p13
+aS'sleet.png'
+p14
+ag14
+aa(lp15
+S'mixed rain and sleet'
+p16
+ag14
+ag14
+aa(lp17
+S'mixed snow and sleet'
+p18
+ag14
+ag14
+aa(lp19
+S'freezing drizzle'
+p20
+ag14
+ag14
+aa(lp21
+S'drizzle'
+p22
+aS'light_rain.png'
+p23
+ag23
+aa(lp24
+S'freezing rain'
+p25
+ag14
+ag14
+aa(lp26
+S'showers'
+p27
+ag23
+ag23
+aa(lp28
+g27
+ag23
+ag23
+aa(lp29
+S'snow flurries'
+p30
+aS'snow1.png'
+p31
+ag31
+aa(lp32
+S'light snow showers'
+p33
+ag31
+ag31
+aa(lp34
+S'blowing snow'
+p35
+aS'snow4.png'
+p36
+ag36
+aa(lp37
+S'snow'
+p38
+ag36
+ag36
+aa(lp39
+S'hail'
+p40
+aS'hail.png'
+p41
+ag41
+aa(lp42
+S'sleet'
+p43
+ag14
+ag14
+aa(lp44
+S'dust'
+p45
+aS'mist.png'
+p46
+ag46
+aa(lp47
+S'foggy'
+p48
+aS'fog.png'
+p49
+ag49
+aa(lp50
+S'haze'
+p51
+ag46
+ag46
+aa(lp52
+S'smoky'
+p53
+aS'cloudy5.png'
+p54
+ag54
+aa(lp55
+S'blustery'
+p56
+ag54
+ag54
+aa(lp57
+S'windy'
+p58
+ag54
+ag54
+aa(lp59
+S'cold'
+p60
+aS'sunny_night.png'
+p61
+ag61
+aa(lp62
+S'cloudy'
+p63
+aS'cloudy4.png'
+p64
+aS'cloudy4_night.png'
+p65
+aa(lp66
+S'mostly cloudy (night)'
+p67
+aS'cloudy3_night.png'
+p68
+ag68
+aa(lp69
+S'mostly cloudy (day)'
+p70
+aS'cloudy3.png'
+p71
+ag71
+aa(lp72
+S'partly cloudy (night)'
+p73
+aS'cloudy2_night.png'
+p74
+ag74
+aa(lp75
+S'partly cloudy (day)'
+p76
+aS'cloudy2.png'
+p77
+ag77
+aa(lp78
+S'clear (night)'
+p79
+ag61
+ag61
+aa(lp80
+S'sunny'
+p81
+aS'sunny.png'
+p82
+ag82
+aa(lp83
+S'fair (night)'
+p84
+aS'cloudy1_night.png'
+p85
+ag85
+aa(lp86
+S'fair (day)'
+p87
+aS'cloudy1.png'
+p88
+ag88
+aa(lp89
+S'mixed rain and hail'
+p90
+ag14
+ag14
+aa(lp91
+S'description'
+p92
+aS'dunno.png'
+p93
+ag93
+aa(lp94
+S'isolated thunderstorms'
+p95
+aS'tstorm1.png'
+p96
+ag96
+aa(lp97
+S'scattered thunderstorms'
+p98
+ag96
+ag96
+aa(lp99
+g98
+ag96
+ag96
+aa(lp100
+S'scattered showers'
+p101
+aS'shower1.png'
+p102
+ag102
+aa(lp103
+S'heavy snow'
+p104
+aS'snow5.png'
+p105
+ag105
+aa(lp106
+S'scattered snow showers'
+p107
+ag31
+ag31
+aa(lp108
+g104
+ag105
+ag105
+aa(lp109
+S'partly cloudy'
+p110
+ag77
+ag77
+aa(lp111
+S'thundershowers'
+p112
+ag96
+ag96
+aa(lp113
+S'snow showers'
+p114
+ag31
+ag31
+aa(lp115
+S'isolated thundershowers'
+p116
+ag96
+ag96
+aa.

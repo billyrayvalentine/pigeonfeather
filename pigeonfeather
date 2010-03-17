@@ -1,0 +1,17 @@
+# An example config file for pidgeonfeather
+[main]
+woeid=12795715
+
+[units]
+# temperature can be 'celcius' or 'fahrenheit'
+temperature=fahrenheit
+
+# wind can be 'kph' or 'mph'
+wind=mph
+
+# pressure can be 'in' or 'mb'
+pressure=mb
+
+#distance can be 'km' or 'mi'
+distance=mi
+
