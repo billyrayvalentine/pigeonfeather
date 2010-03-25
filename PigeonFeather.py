@@ -98,8 +98,8 @@ class PigeonFeather(QMainWindow):
         try:
             self.configureDialog.setWoeid(woeid)
         except ValueError as ve:
-            self.config.set('main', 'woeid', '2408843')
-            self.configureDialog.setWoeid('248843')
+            self.config.set('main', 'woeid', '2408842')
+            self.configureDialog.setWoeid('2408842')
 
         # Set temperature units
         if self.config.get('units', 'temperature') == 'fahrenheit':
@@ -125,13 +125,14 @@ class PigeonFeather(QMainWindow):
         else:
             self.configureDialog.setPressure('in')
 
-        # Start getWeather thread with Id from configfahrenheit
+        # Start getWeather thread with Id from config
         self.getWeatherThread = GetWeatherQThread(self.config.get( \
             'main', 'woeid'))
         self.getWeatherThread.start()
         self.connect(self.getWeatherThread, SIGNAL('WeatherUpdate'), \
             self.processWeather)
-
+        self.connect(self.getWeatherThread, SIGNAL('WeatherReadError'), \
+            self.showError)
     def loadConfig(self):
         """Load preferences from defaults then self.USER_CONFIG if exists"""
         # Load a default set first
@@ -191,6 +192,15 @@ distance=mi
                 'Could not save configuration settings to disk', \
                 QSystemTrayIcon.Warning)
             print(str(ioe))
+
+    def showError(self, message):
+        """Show a error message as a tray balloon
+
+        Keyword arguments:
+        message -- Error message to display
+        """
+        self.trayIcon.showMessage('Weather error', message, \
+            QSystemTrayIcon.Warning)
 
     def trayIconClicked(self, reason):
         """If the tray icon is left clicked, show/hide the weather dialog

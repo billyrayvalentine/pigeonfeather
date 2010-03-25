@@ -35,6 +35,9 @@ def getWeather(woeid, url='http://weather.yahooapis.com/forecastrss', \
 
     Exceptions:
         IOError -- Is re-raised if caught from the call to urllib2
+        IndexError -- Is re-raised if caught while try to parse the returned
+            weather.  Usually thrown if weather data is invalid because of
+            invalid woeid.
 
     Returns:
     A dictionary containg the weather information in this format
@@ -76,7 +79,7 @@ def getWeather(woeid, url='http://weather.yahooapis.com/forecastrss', \
     try:
         f = urlopen(getUrl)
         data = f.read()
-    except IOError, e:
+    except IOError as e:
         raise e
 
     # Build xml doc from returned data and get and return the code and temp
@@ -90,8 +93,14 @@ def getWeather(woeid, url='http://weather.yahooapis.com/forecastrss', \
     weather['fetched'] = datetime.now()
 
     # Location data
-    location = tree.xpath('//y:location', \
-        namespaces={'y': 'http://xml.weather.yahoo.com/ns/rss/1.0'})[0]
+    # Catch any exception caught here and re-raise beacuse of invalid data
+    # Will usually happen in woeid is invalid
+    try:
+        location = tree.xpath('//y:location', \
+            namespaces={'y': 'http://xml.weather.yahoo.com/ns/rss/1.0'})[0]
+    except IndexError as ie:
+        raise ie
+
     weather['city'] = location.get('city')
     weather['region'] = location.get('region')
     weather['country'] = location.get('country')
