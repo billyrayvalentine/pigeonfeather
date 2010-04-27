@@ -126,13 +126,16 @@ class PigeonFeather(QMainWindow):
             self.configureDialog.setPressure('in')
 
         # Start getWeather thread with Id from config
+        # Connect two slots for the two signals emitted from thread
         self.getWeatherThread = GetWeatherQThread(self.config.get( \
             'main', 'woeid'))
         self.getWeatherThread.start()
+
         self.connect(self.getWeatherThread, SIGNAL('WeatherUpdate'), \
             self.processWeather)
         self.connect(self.getWeatherThread, SIGNAL('WeatherReadError'), \
-            self.showError)
+            self.showErrorMessage)
+
     def loadConfig(self):
         """Load preferences from defaults then self.USER_CONFIG if exists"""
         # Load a default set first
@@ -188,19 +191,17 @@ distance=mi
             with open(self.USER_CONFIG, 'wb') as configfile:
                 self.config.write(configfile)
         except IOError as ioe:
-            self.trayIcon.showMessage('Configuration Error', \
-                'Could not save configuration settings to disk', \
-                QSystemTrayIcon.Warning)
-            print(str(ioe))
+            self.showErrorMessage('Could not save configuration settings' + \
+                'to disk')
 
-    def showError(self, message):
-        """Show a error message as a tray balloon
+    def showErrorMessage(self, message):
+        """Show a error as a tray balloon message
 
         Keyword arguments:
         message -- Error message to display
         """
-        self.trayIcon.showMessage('Weather error', message, \
-            QSystemTrayIcon.Warning)
+        self.trayIcon.showMessage('Application Error', message, \
+            QSystemTrayIcon.Critical)
 
     def trayIconClicked(self, reason):
         """If the tray icon is left clicked, show/hide the weather dialog

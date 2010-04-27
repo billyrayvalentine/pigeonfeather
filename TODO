@@ -1,9 +1,11 @@
-Show stopers
+TODO 
 
+* Proper error handling if woeid from config dialogue is invalid
 * Re-distribute licenses from pyqt4, lxml, kde3 icons?
-* Error handling - PARTIALLY COMPLETE, thread silently retries if connection can not be made
 * Set Mac app icon and menu
 * Copy and paste not working on mac
+* Application icon
+
 
 Future ideas
 
@@ -11,3 +13,10 @@ Get Woeid for current IP address
     * get remote ip address http://www.whatismyip.com/automation/n09230945.asp
     * http://www.geomojo.org/cgi-bin/reversegeocoder.cgi?long=-97.470929&lat=37.510042
     * http://ipinfodb.com/ip_location_api.php
+
+Windows Installer
+    * One .exe / zip download that installs Pigeon Feather to a location with
+        option to start programme on startup
+
+Forecast
+    * Display forecast of weather as well as the weather for current day
