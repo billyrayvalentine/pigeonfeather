@@ -16,8 +16,8 @@
 # along with Pigeon Feather.  If not, see <http://www.gnu.org/licenses/>.
 
 """Function to get the weather for a given woeid and return in a dictionary"""
-from urllib import urlencode
-from urllib2 import urlopen
+from urllib.parse import urlencode
+from urllib.request import urlopen
 from lxml import etree
 from datetime import datetime
 

@@ -17,7 +17,7 @@
 # along with Pigeon Feather.  If not, see <http://www.gnu.org/licenses/>.
 
 """PigeonFeather.py Entry point for the application"""
-from __future__ import with_statement
+
 import sys
 import pickle
 import platform
@@ -27,8 +27,8 @@ from PyQt4.QtGui import QPixmap, QMenu, QMessageBox, QPainter, QFont, QColor
 from GetWeatherQThread import GetWeatherQThread
 from WeatherDialog import WeatherDialog
 from ConfigureDialog import ConfigureDialog
-from ConfigParser import ConfigParser
-import StringIO
+from configparser import ConfigParser
+import io
 import os.path
 
 
@@ -139,7 +139,7 @@ class PigeonFeather(QMainWindow):
     def loadConfig(self):
         """Load preferences from defaults then self.USER_CONFIG if exists"""
         # Load a default set first
-        defaultConfig = StringIO.StringIO("""\
+        defaultConfig = io.StringIO("""\
 [main]
 Woeid=2408842
 [units]
@@ -299,7 +299,7 @@ distance=mi
         self.setTrayIcon(icon)
 
         # Set the tool tip
-        tempString = str(temp) + u'°' + tempUnit + ' ' + text
+        tempString = str(temp) + '°' + tempUnit + ' ' + text
         self.trayIcon.setToolTip(tempString)
 
         # Update the weather report dialog
@@ -311,7 +311,7 @@ distance=mi
         self.weatherDialog.labelSunrise.setText(sunrise)
         self.weatherDialog.labelSunset.setText(sunset)
         self.weatherDialog.labelWindChill.setText(str(chill) + \
-            u'°' + tempUnit)
+            '°' + tempUnit)
         self.weatherDialog.labelWindSpeed.setText(str(windSpeed) + ' ' + \
             speedUnit)
         self.weatherDialog.labelWindDirection.setText(directionTextual)
@@ -331,7 +331,7 @@ distance=mi
         """Create the icon to display in the tray"""
         # Create a map of what image to use based on code
         # Start by creating a transparent image to paint on
-        print('Using' + iconFileName)
+        print(('Using' + iconFileName))
         icon = QPixmap(22, 22)
         icon.fill(Qt.transparent)
 
