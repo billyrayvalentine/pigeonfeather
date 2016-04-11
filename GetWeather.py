@@ -22,7 +22,7 @@ from lxml import etree
 from datetime import datetime
 
 
-def getWeather(woeid, url='http://weather.yahooapis.com/forecastrss', \
+def getWeather(woeid, url='http://xml.weather.yahoo.com/forecastrss', \
     timeout=15):
     """Get the weather from Yahoo! weather service for a given WOEID
     and return a dictionary containing weather data.
@@ -82,6 +82,7 @@ def getWeather(woeid, url='http://weather.yahooapis.com/forecastrss', \
     except IOError as e:
         raise e
 
+    #print(data)
     # Build xml doc from returned data and get and return the code and temp
     # lxml could actually get the doc here
     tree = etree.fromstring(data)
