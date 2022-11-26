@@ -21,9 +21,10 @@
 import sys
 import pickle
 import platform
-from PyQt4.QtCore import SIGNAL, Qt, QPoint
-from PyQt4.QtGui import QMainWindow, QApplication, QSystemTrayIcon, QIcon
-from PyQt4.QtGui import QPixmap, QMenu, QMessageBox, QPainter, QFont, QColor
+from PySide6.QtCore import SIGNAL, Qt, QPoint
+#from PySide6.QtGui import QMainWindow, QApplication, QSystemTrayIcon, QIcon
+from PySide6.QtWidgets import QMainWindow, QApplication, QSystemTrayIcon, QMenu, QMessageBox
+from PySide6.QtGui import QIcon, QPixmap, QPainter, QFont, QColor
 from GetWeatherQThread import GetWeatherQThread
 from WeatherDialog import WeatherDialog
 from ConfigureDialog import ConfigureDialog

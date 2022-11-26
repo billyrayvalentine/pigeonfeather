@@ -17,8 +17,9 @@
 
 """Class to display a weather report dialog"""
 import sys
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+#from PySide6.QtCore import *
+#from PySide6.QtGui import *
+from PySide6.QtWidgets import QDialog
 import ui_weather
 
 

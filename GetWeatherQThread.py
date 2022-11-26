@@ -18,8 +18,8 @@
 """QThread subclass used in PigeonFeather for calling getWeather
 and emitting a signal everytime there is an update
 """
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PySide6.QtCore import *
+from PySide6.QtGui import *
 from GetWeather import getWeather
 import sys
 
