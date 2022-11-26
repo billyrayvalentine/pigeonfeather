@@ -17,8 +17,6 @@
 
 """Class to display a configure report dialog"""
 import sys
-#from PySide6.QtCore import *
-#from PySide6.QtGui import *
 from PySide6.QtWidgets import QDialog
 import ui_configure
 
@@ -38,12 +36,10 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         super(ConfigureDialog, self).setupUi(self)
 
         # Connect the OK button
-        self.connect(self.pushButtonOk, SIGNAL('clicked()'), \
-            self.okButtonClicked)
+        self.pushButtonOk.clicked.connect(self.okButtonClicked)
 
         # Connect the Cancel button
-        self.connect(self.pushButtonCancel, SIGNAL('clicked()'), \
-            self.cancelButtonClicked)
+        self.pushButtonCancel.clicked.connect(self.cancelButtonClicked)
 
     def okButtonClicked(self):
         """Called when the OK button is clicked, emit a 'ConfigureDialogOk'

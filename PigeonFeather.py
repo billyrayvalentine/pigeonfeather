@@ -367,4 +367,4 @@ if __name__ == "__main__":
     app.setQuitOnLastWindowClosed(False)
     main = PigeonFeather()
     main.setVisible(False)
-    app.exec_()
+    app.exec()
