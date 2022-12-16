@@ -17,8 +17,8 @@
 
 """Class to display a weather report dialog"""
 import sys
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+
+from PySide6.QtWidgets import QDialog
 import ui_weather
 
 
@@ -34,6 +34,7 @@ class WeatherDialog(QDialog, ui_weather.Ui_Weather):
     def setup(self):
         """Setup and start the application"""
         super(WeatherDialog, self).setupUi(self)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

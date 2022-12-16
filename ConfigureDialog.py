@@ -17,8 +17,7 @@
 
 """Class to display a configure report dialog"""
 import sys
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PySide6.QtWidgets import QDialog
 import ui_configure
 
 
@@ -37,12 +36,10 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         super(ConfigureDialog, self).setupUi(self)
 
         # Connect the OK button
-        self.connect(self.pushButtonOk, SIGNAL('clicked()'), \
-            self.okButtonClicked)
+        self.pushButtonOk.clicked.connect(self.okButtonClicked)
 
         # Connect the Cancel button
-        self.connect(self.pushButtonCancel, SIGNAL('clicked()'), \
-            self.cancelButtonClicked)
+        self.pushButtonCancel.clicked.connect(self.cancelButtonClicked)
 
     def okButtonClicked(self):
         """Called when the OK button is clicked, emit a 'ConfigureDialogOk'
@@ -59,13 +56,13 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         ConfigureDialogOk - Contains a dictionary of the current dialog values
         """
         values = {}
-        values['woeid'] = str(self.lineEditWoeid.text())
-        values['temperature'] = self.getTemperature()
-        values['distance'] = self.getDistance()
-        values['wind'] = self.getWind()
-        values['pressure'] = self.getPressure()
+        values["woeid"] = str(self.lineEditWoeid.text())
+        values["temperature"] = self.getTemperature()
+        values["distance"] = self.getDistance()
+        values["wind"] = self.getWind()
+        values["pressure"] = self.getPressure()
 
-        self.emit(SIGNAL('ConfigureDialogOk'), values)
+        self.emit(SIGNAL("ConfigureDialogOk"), values)
         self.setVisible(False)
 
     def cancelButtonClicked(self):
@@ -85,11 +82,11 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         try:
             int(woeid)
         except ValueError as e:
-            raise ValueError('Woeid is not a valid 32bit integer')
+            raise ValueError("Woeid is not a valid 32bit integer")
 
         # If woeid is greater than this then it is not a 32 unsigned integer
         if int(woeid) > 4294967295 or int(woeid) < 1:
-            raise ValueError('Woeid is not a valid 32bit Integer')
+            raise ValueError("Woeid is not a valid 32bit Integer")
 
         # Woeid should be valid, set the lineEdit
         self.lineEditWoeid.setText(str(woeid))
@@ -105,11 +102,11 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         ValueError -- Is raised if the temperatire has an invalid value
         """
         # Check if value is valid
-        if temperature not in ['fahrenheit', 'celcius']:
+        if temperature not in ["fahrenheit", "celcius"]:
             raise ValueError('Invalid temp, use "fahrenheit" or "celcius"')
 
         # Woeid should be valid set the lineEdit
-        if temperature == 'fahrenheit':
+        if temperature == "fahrenheit":
             self.radioButtonFahrenheit.setChecked(True)
         else:
             self.radioButtonCelcius.setChecked(True)
@@ -125,11 +122,11 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         ValueError -- Is raised if the distance has an invalid value
         """
         # Check if value is valid
-        if distance not in ['km', 'mi']:
+        if distance not in ["km", "mi"]:
             raise ValueError('Invalid distance, use "km" or "mi"')
 
         # distance should be valid set the correct radio button
-        if distance == 'km':
+        if distance == "km":
             self.radioButtonKm.setChecked(True)
         else:
             self.radioButtonMi.setChecked(True)
@@ -145,11 +142,11 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         ValueError -- Is raised if the has an invalid value
         """
         # Check if value is valid
-        if wind not in ['kph', 'mph']:
+        if wind not in ["kph", "mph"]:
             raise ValueError('Invalid wind, use "kph" or "mph"')
 
         # distance should be valid set the correct radio button
-        if wind == 'kph':
+        if wind == "kph":
             self.radioButtonKph.setChecked(True)
         else:
             self.radioButtonMph.setChecked(True)
@@ -165,11 +162,11 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         ValueError -- Is raised if the has an invalid value
         """
         # Check if value is valid
-        if pressure not in ['mb', 'in']:
+        if pressure not in ["mb", "in"]:
             raise ValueError('Invalid pressure, use "mb" or "in"')
 
         # distance should be valid set the correct radio button
-        if pressure == 'mb':
+        if pressure == "mb":
             self.radioButtonMb.setChecked(True)
         else:
             self.radioButtonIn.setChecked(True)
@@ -189,9 +186,9 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         A String containing either 'fahrenheit' or 'celcius'
         """
         if self.radioButtonFahrenheit.isChecked():
-            return 'fahrenheit'
+            return "fahrenheit"
         else:
-            return 'celcius'
+            return "celcius"
 
     def getDistance(self):
         """Return the distance from the dialog
@@ -200,9 +197,9 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         A String containing either 'km' or 'mi'
         """
         if self.radioButtonKm.isChecked():
-            return 'km'
+            return "km"
         else:
-            return 'mi'
+            return "mi"
 
     def getWind(self):
         """Return the wind from the dialog
@@ -211,9 +208,9 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         A String containing either 'kph' or 'mph'
         """
         if self.radioButtonKph.isChecked():
-            return 'kph'
+            return "kph"
         else:
-            return 'mph'
+            return "mph"
 
     def getPressure(self):
         """Return the wind from the dialog
@@ -222,9 +219,10 @@ class ConfigureDialog(QDialog, ui_configure.Ui_Dialog):
         A String containing either 'mb' or 'in'
         """
         if self.radioButtonMb.isChecked():
-            return 'mb'
+            return "mb"
         else:
-            return 'in'
+            return "in"
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
