@@ -1,4 +1,4 @@
-TODO 
+TODO
 
 * Proper error handling if woeid from config dialogue is invalid
 * Re-distribute licenses from pyqt4, lxml, kde3 icons?

@@ -22,8 +22,7 @@ from lxml import etree
 from datetime import datetime
 
 
-def getWeather(woeid, url='http://xml.weather.yahoo.com/forecastrss', \
-    timeout=15):
+def getWeather(woeid, url="http://xml.weather.yahoo.com/forecastrss", timeout=15):
     """Get the weather from Yahoo! weather service for a given WOEID
     and return a dictionary containing weather data.
 
@@ -72,9 +71,9 @@ def getWeather(woeid, url='http://xml.weather.yahoo.com/forecastrss', \
     # Build the url. Always use the 'f' parameter for units as we convert
     # everything based on that.
     # If an exception is caught re-raise it
-    params = urlencode({'u': 'f', 'w': woeid})
-    getUrl = url + '?' + params
-    #print(getUrl)
+    params = urlencode({"u": "f", "w": woeid})
+    getUrl = url + "?" + params
+    # print(getUrl)
 
     try:
         f = urlopen(getUrl)
@@ -82,7 +81,7 @@ def getWeather(woeid, url='http://xml.weather.yahoo.com/forecastrss', \
     except IOError as e:
         raise e
 
-    #print(data)
+    # print(data)
     # Build xml doc from returned data and get and return the code and temp
     # lxml could actually get the doc here
     tree = etree.fromstring(data)
@@ -91,98 +90,102 @@ def getWeather(woeid, url='http://xml.weather.yahoo.com/forecastrss', \
     weather = {}
 
     # fetched time
-    weather['fetched'] = datetime.now()
+    weather["fetched"] = datetime.now()
 
     # Location data
     # Catch any exception caught here and re-raise beacuse of invalid data
     # Will usually happen in woeid is invalid
     try:
-        location = tree.xpath('//y:location', \
-            namespaces={'y': 'http://xml.weather.yahoo.com/ns/rss/1.0'})[0]
+        location = tree.xpath(
+            "//y:location", namespaces={"y": "http://xml.weather.yahoo.com/ns/rss/1.0"}
+        )[0]
     except IndexError as ie:
         raise ie
 
-    weather['city'] = location.get('city')
-    weather['region'] = location.get('region')
-    weather['country'] = location.get('country')
+    weather["city"] = location.get("city")
+    weather["region"] = location.get("region")
+    weather["country"] = location.get("country")
 
     # Wind Chill
-    wind = tree.xpath('//y:wind', \
-        namespaces={'y': 'http://xml.weather.yahoo.com/ns/rss/1.0'})[0]
-    weather['chillF'] = wind.get('chill')
-    weather['chillC'] = \
-        int(round(((float(wind.get('chill')) - 32) / 9) * 5))
+    wind = tree.xpath(
+        "//y:wind", namespaces={"y": "http://xml.weather.yahoo.com/ns/rss/1.0"}
+    )[0]
+    weather["chillF"] = wind.get("chill")
+    weather["chillC"] = int(round(((float(wind.get("chill")) - 32) / 9) * 5))
 
     # Wind Speed
-    weather['windSpeedKph'] = int(round(float(wind.get('speed')) * 1.609344))
-    weather['windSpeedMph'] = wind.get('speed')
+    weather["windSpeedKph"] = int(round(float(wind.get("speed")) * 1.609344))
+    weather["windSpeedMph"] = wind.get("speed")
 
     # Wind Direction
-    weather['directionDegrees'] = wind.get('direction')
+    weather["directionDegrees"] = wind.get("direction")
 
     # TODO - is this definitely right?
     # set a textual value for the direction
-    direction = int(wind.get('direction'))
+    direction = int(wind.get("direction"))
     if direction >= 0 and direction < 45:
-        direction = 'N'
+        direction = "N"
     elif direction >= 45 and direction < 90:
-        direction = 'NE'
+        direction = "NE"
     elif direction >= 90 and direction < 135:
-        direction = 'E'
+        direction = "E"
     elif direction >= 135 and direction < 180:
-        direction = 'SE'
+        direction = "SE"
     elif direction >= 180 and direction < 225:
-        direction = 'S'
+        direction = "S"
     elif direction >= 225 and direction < 270:
-        direction = 'SW'
+        direction = "SW"
     elif direction >= 270 and direction < 315:
-        direction = 'W'
+        direction = "W"
     elif direction >= 315 and direction < 360:
-        direction = 'NW'
+        direction = "NW"
     else:
-        direction = 'N'
+        direction = "N"
 
-    weather['directionTextual'] = str(direction)
+    weather["directionTextual"] = str(direction)
 
     # Humidity, Visibility and Pressure
-    atmosphere = tree.xpath('//y:atmosphere', \
-        namespaces={'y': 'http://xml.weather.yahoo.com/ns/rss/1.0'})[0]
-    weather['humidity'] = atmosphere.get('humidity')
-    weather['visibilityMi'] = atmosphere.get('visibility')
-    weather['visibilityKm'] = \
-        int(round(float(atmosphere.get('visibility')) * 1.609344))
-    weather['pressureIn'] = atmosphere.get('pressure')
-    weather['pressureMb'] = \
-        str(round((float(atmosphere.get('pressure')) * 33.8637526),2))
+    atmosphere = tree.xpath(
+        "//y:atmosphere", namespaces={"y": "http://xml.weather.yahoo.com/ns/rss/1.0"}
+    )[0]
+    weather["humidity"] = atmosphere.get("humidity")
+    weather["visibilityMi"] = atmosphere.get("visibility")
+    weather["visibilityKm"] = int(round(float(atmosphere.get("visibility")) * 1.609344))
+    weather["pressureIn"] = atmosphere.get("pressure")
+    weather["pressureMb"] = str(
+        round((float(atmosphere.get("pressure")) * 33.8637526), 2)
+    )
 
     # Set a textual value for rising
-    rising = int(atmosphere.get('rising'))
+    rising = int(atmosphere.get("rising"))
     if rising == 0:
-        rising = 'steady'
+        rising = "steady"
     elif rising == 1:
-        rising = 'rising'
+        rising = "rising"
     elif rising == 2:
-        rising = 'falling'
+        rising = "falling"
 
-    weather['pressureTendancy'] = str(rising)
+    weather["pressureTendancy"] = str(rising)
 
     # Weather condition code, temperature, summary text
-    condition = tree.xpath('//y:condition', \
-        namespaces={'y': 'http://xml.weather.yahoo.com/ns/rss/1.0'})[0]
-    weather['code'] = condition.get('code')
-    weather['tempF'] = condition.get('temp')
-    weather['tempC'] = \
-        int(round(((float(condition.get('temp')) - 32) / 9) * 5))
-    weather['text'] = condition.get('text')
+    condition = tree.xpath(
+        "//y:condition", namespaces={"y": "http://xml.weather.yahoo.com/ns/rss/1.0"}
+    )[0]
+    weather["code"] = condition.get("code")
+    weather["tempF"] = condition.get("temp")
+    weather["tempC"] = int(round(((float(condition.get("temp")) - 32) / 9) * 5))
+    weather["text"] = condition.get("text")
 
     # Sunset and sunrise
-    sun = tree.xpath('//y:astronomy', \
-        namespaces={'y': 'http://xml.weather.yahoo.com/ns/rss/1.0'})[0]
-    weather['sunrise'] = sun.get('sunrise')
-    weather['sunset'] = sun.get('sunset')
+    sun = tree.xpath(
+        "//y:astronomy", namespaces={"y": "http://xml.weather.yahoo.com/ns/rss/1.0"}
+    )[0]
+    weather["sunrise"] = sun.get("sunrise")
+    weather["sunset"] = sun.get("sunset")
 
     print(weather)
     return weather
 
-if __name__ == '__main__':
-    a = getWeather('44481', 'http://weather.yahooapis.com/forecastrss')
+
+if __name__ == "__main__":
+    a = getWeather("44481", "http://weather.yahooapis.com/forecastrss")
