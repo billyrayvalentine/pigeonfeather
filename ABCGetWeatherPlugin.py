@@ -1,8 +1,8 @@
-# Abstract base class for PidgeonFeatherAbstractWeatherGetter
+# Abstract base class for GetWeatherPlugin
 
 from abc import ABCMeta, abstractmethod
 
-class PidgeonFeatherAbstractWeatherGetter(metaclass=ABCMeta):
+class ABCGetWeatherPlugin(metaclass=ABCMeta):
 
     @abstractmethod
     def get_weather(latitude: float, longitude: float) -> dict:

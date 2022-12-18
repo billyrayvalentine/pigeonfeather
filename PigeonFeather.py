@@ -37,6 +37,7 @@ from WeatherDialog import WeatherDialog
 from ConfigureDialog import ConfigureDialog
 from configparser import ConfigParser
 
+import plugins.RandomGetWeatherPlugin
 
 class PigeonFeather(QMainWindow):
     """Main class for the application, inherits class genrated from pyuic"""

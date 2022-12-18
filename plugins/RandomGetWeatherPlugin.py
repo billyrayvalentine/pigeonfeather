@@ -1,9 +1,9 @@
-# Implementation of PidgeonFeatherAbstractWeatherGetter
+# Implementation of ABCGetWeatherPlugin
 # Return some random but valid weather data
 from random import randint
-from PidgeonFeatherAbstractWeatherGetter import PidgeonFeatherAbstractWeatherGetter
+from ABCGetWeatherPlugin import ABCGetWeatherPlugin
 
-class PidgeonFeatherRandomWeatherGetter(PidgeonFeatherAbstractWeatherGetter):
+class RandomGetWeatherPlugin(ABCGetWeatherPlugin):
 
     def get_weather(self, latitude: float, longitude: float) -> dict:
         a = dict()
@@ -14,6 +14,6 @@ class PidgeonFeatherRandomWeatherGetter(PidgeonFeatherAbstractWeatherGetter):
         return a
 
 if __name__ == "__main__":
-    a = PidgeonFeatherRandomWeatherGetter()
+    a = RandomGetWeatherPlugin()
     weather_data = a.get_weather(1,2)
     print(f"got: {weather_data}")
