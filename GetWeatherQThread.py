@@ -18,8 +18,7 @@
 """QThread subclass used in PigeonFeather for calling getWeather
 and emitting a signal everytime there is an update
 """
-from PySide6.QtCore import *
-from PySide6.QtGui import *
+from PySide6.QtCore import QThread, Signal
 from GetWeather import getWeather
 import sys
 
@@ -51,30 +50,30 @@ class GetWeatherQThread(QThread):
         with weather data, and sleep for the updateTime
         """
         while 1:
-            print('Starting thread')
+            print("Starting thread")
             print(self.woeid)
             try:
                 res = getWeather(self.woeid)
             except IOError as e:
                 # If we catch an error then wait and try again
-                print('Get weather failed, trying again')
+                print("Get weather failed, trying again")
                 self.sleep(self.updateTime)
                 continue
             except IndexError as ie:
                 # Catching a Index exception usually means the Xpath failed
                 # because the WOEID was invalid, emit a 'WeatherReadError'
                 # wait (so that the user might change the woeid) and try again
-                msg = 'The weather data could not be read.  Please check ' + \
-                    'the Woeid'
-                self.emit(SIGNAL('WeatherReadError'), msg)
+                msg = "The weather data could not be read.  Please check " + "the Woeid"
+                self.emit(SIGNAL("WeatherReadError"), msg)
                 self.sleep(self.updateTime)
                 continue
 
             # Weather was received ok emit the signal cotaining the dictionary
-            self.emit(SIGNAL('WeatherUpdate'), res)
+            self.emit(SIGNAL("WeatherUpdate"), res)
             self.sleep(self.updateTime)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    a = GetWeatherQThread('44481').start()
+    a = GetWeatherQThread("44481").start()
     app.exec_()
