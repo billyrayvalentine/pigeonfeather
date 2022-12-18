@@ -1,8 +1,10 @@
 from dataclasses import dataclass
 
+
 @dataclass
 class DataClassWeather:
     """Dataclass storing weather data for Pidgeonfeather."""
+
     weather_code: int
     temperature_c: float
     temperature_apparent_c: float
@@ -12,5 +14,3 @@ class DataClassWeather:
     sunset: str
     visability_m: int
     humidity: int
-
-

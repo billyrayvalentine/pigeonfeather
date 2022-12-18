@@ -2,8 +2,8 @@
 
 from abc import ABCMeta, abstractmethod
 
-class ABCGetWeatherPlugin(metaclass=ABCMeta):
 
+class ABCGetWeatherPlugin(metaclass=ABCMeta):
     @abstractmethod
     def get_weather(latitude: float, longitude: float) -> dict:
         """Return a dictionary in the following format
@@ -14,5 +14,3 @@ class ABCGetWeatherPlugin(metaclass=ABCMeta):
         a["wind_direction"] = 0-360 Int
         a["weather_code"] = 0-99 Int"""
         pass
-
-
